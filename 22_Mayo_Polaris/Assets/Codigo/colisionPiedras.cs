@@ -6,19 +6,14 @@ public class colisionPiedras : MonoBehaviour {
 
 	public int vida = 3;
 
-	// Use this for initialization
-	void Start () {
-
-
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		
-	}
-
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(Player.instance.inmunity == false)
+        {
+            Player.instance.vida--;
+            Player.instance.inmunity = true;
+        }
+    }
 
 
 

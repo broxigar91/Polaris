@@ -6,13 +6,6 @@ public class BarraVida : MonoBehaviour {
 
 	public int vida = 5;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
-
-	
 	// Update is called once per frame
 	void Update () {
 		if(Player.instance.vida != vida)

@@ -12,29 +12,25 @@ public class Player : MonoBehaviour {
 	public float delayArma;
 
 
-	public int vida = 5;
+    Animator anim;
+    Rigidbody2D rb2d;
+    Vector2 mov;  // Ahora es visible entre los métodos
+
+    public int vida = 5;
 	public float inmunityTime;
 	public float tiempo;
 	public bool inmunity = false;
 
 	private void Awake()
 	{
-		if (Player.instance == null) {
-			Player.instance = this;
-		} else if (Player.instance != this) {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
 			Destroy (gameObject);
 			Debug.LogWarning ("Player ha sido instanciado por segunda vez");
 		}
 	}
-
-
-
-
-
-
-
-
-
+    
 	//COPIAR ESTA PARTE EN EL ARCHIVO DEL OSO
 
 
@@ -68,16 +64,6 @@ public class Player : MonoBehaviour {
 //
 //	}
 
-		
-		
-	
-
-
-	Animator anim;
-	Rigidbody2D rb2d;
-	Vector2 mov;  // Ahora es visible entre los métodos
-
-
 	void awake () {
 
 		Assert.IsNotNull (slashPrefab);
@@ -102,6 +88,7 @@ public class Player : MonoBehaviour {
 			}
 
 		}
+
 		delayArma += Time.deltaTime;
 
 
@@ -137,23 +124,6 @@ public class Player : MonoBehaviour {
 	void FixedUpdate () {
 		// Nos movemos en el fixed por las físicas
 		rb2d.MovePosition(rb2d.position + mov * speed * Time.deltaTime);
-	}
-
-	public void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (collision.collider.tag == "Enemigo" || collision.collider.tag == "ColisionDano") 
-		{	if (collision.collider.name == "Barrera") {
-				vida = 0;
-			}
-
-			else if(!inmunity)
-				vida--;
-			inmunity = true;
-			Debug.Log ("Se han chocado en PLAYER");
-
-		}
-
-
 	}
 
 

@@ -13,13 +13,27 @@ public class Enemigo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+        if (vida == 0)
+            Destroy(gameObject);
+    }
 
 	public void OnTriggerEnter2D(Collider2D collision)
-	{   vida--;
-		if(vida == 0)
-			Destroy(gameObject);
-		Debug.Log ("CHOQUE");
+	{
+        if(collision.gameObject.tag == "Bullet")
+        {
+            vida--;
+        }
+        else if(collision.gameObject.tag == "Player")
+        {
+            if(Player.instance.inmunity == false)
+            {
+                Player.instance.vida--;
+                Player.instance.inmunity = true;
+            }
+            
+        }
+        
+        
 	}
 }
