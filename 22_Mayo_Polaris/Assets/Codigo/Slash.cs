@@ -23,7 +23,7 @@ public class Slash : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D collision)
 	{   
-		if(!(collision.name == "Oso"))
+		if(collision.tag != "Player")
 			Destroy(gameObject);
 	}
 

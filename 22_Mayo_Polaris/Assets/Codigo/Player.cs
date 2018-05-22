@@ -127,35 +127,26 @@ public class Player : MonoBehaviour {
 	}
 
 
-    void SlashAttack () {
+    void SlashAttack ()
+    {
 		// Buscamos el estado actual mirando la información del animador
 		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 
-	
-
-
 		// Ataque a distancia CAMBIAR DELAYARMA PARA QUE EL PROJECTIL VAYA MAS LENTO/RAPIDO
-		if (Input.GetKeyUp (KeyCode.Space)) {
-		} else if (Input.GetKeyDown (KeyCode.Space) && delayArma >0.3) { 
-				float angle = Mathf.Atan2 (
-				 anim.GetFloat ("movY"), 
-				 anim.GetFloat ("movX")
-				  ) * Mathf.Rad2Deg;
+		if (Input.GetKeyUp (KeyCode.Space)){
+		}
+        else if (Input.GetKeyDown (KeyCode.Space) && delayArma >0.3) { 
+				float angle = Mathf.Atan2 ( anim.GetFloat ("movY"), anim.GetFloat ("movX")) * Mathf.Rad2Deg;
 
-				GameObject slashObj = Instantiate (
-					   slashPrefab, transform.position, 
-					   Quaternion.AngleAxis (angle, Vector3.forward)
-				                     );
+				GameObject slashObj = Instantiate (slashPrefab, transform.position,Quaternion.AngleAxis (angle, Vector3.forward));
 
 				Slash slash = slashObj.GetComponent<Slash> ();
 				slash.mov.x = anim.GetFloat ("movX");
 				slash.mov.y = anim.GetFloat ("movY");
 			delayArma = 0;
-			}
-
 		}
-
 	}
+}
 
 
 

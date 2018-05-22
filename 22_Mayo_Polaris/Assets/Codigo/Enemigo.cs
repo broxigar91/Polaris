@@ -20,20 +20,15 @@ public class Enemigo : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D collision)
 	{
-        if(collision.gameObject.tag == "Bullet")
-        {
+        if(collision.gameObject.tag == "Bullet"){
             vida--;
         }
-        else if(collision.gameObject.tag == "Player")
-        {
+        else if(collision.gameObject.tag == "Player"){
             if(Player.instance.inmunity == false)
             {
                 Player.instance.vida--;
                 Player.instance.inmunity = true;
             }
-            
-        }
-        
-        
+        }     
 	}
 }
