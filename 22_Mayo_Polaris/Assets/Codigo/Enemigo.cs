@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemigo : MonoBehaviour {
 
 	public int vida = 3;
+	public float speed; 
+	public Vector2 pos;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +18,8 @@ public class Enemigo : MonoBehaviour {
 
         if (vida == 0)
             Destroy(gameObject);
+
+		transform.Translate (new Vector2 (-speed * Time.deltaTime, 0));
     }
 
 	public void OnTriggerEnter2D(Collider2D collision)
