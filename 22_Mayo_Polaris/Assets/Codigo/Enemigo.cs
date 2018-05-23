@@ -5,8 +5,9 @@ using UnityEngine;
 public class Enemigo : MonoBehaviour {
 
 	public int vida = 3;
+    public int daño;
 	public float speed; 
-	public Vector2 pos;
+	//public Vector2 pos;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,7 @@ public class Enemigo : MonoBehaviour {
         else if(collision.gameObject.tag == "Player"){
             if(Player.instance.inmunity == false)
             {
-                Player.instance.vida--;
+                Player.instance.vida -= daño;
                 Player.instance.inmunity = true;
             }
         }     

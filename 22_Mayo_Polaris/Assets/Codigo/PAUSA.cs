@@ -1,25 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PAUSA : MonoBehaviour {
+public class Pausa : MonoBehaviour {
 
-	bool active;
-	Canvas canvas;
-	// Use this for initialization
-	void Start () {
-		canvas = GetComponent<Canvas> ();
-		canvas.enabled = false;
+    public static Pausa instance;
 
-	}
+    private void Start()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown ("escape")) {
-			active = !active;
-			canvas.enabled = active;
-			Time.timeScale = (active) ? 0 : 1f;
-		}
-	}
+        DontDestroyOnLoad(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void Continuar()
+    {
+        GameManager.instance.estado = EstadosJuego.JUGANDO;
+        Time.timeScale = 1;
+        gameObject.SetActive(false);
+    }
+
+    public void Salir()
+    {
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    
 
 }
