@@ -20,7 +20,8 @@ public class Enemigo : MonoBehaviour {
         if (vida == 0)
             Destroy(gameObject);
 
-		transform.Translate (new Vector2 (-speed * Time.deltaTime, 0));
+        if(GameManager.instance.estado == EstadosJuego.JUGANDO)
+		    transform.Translate (new Vector2 (-speed * Time.deltaTime, 0));
     }
 
 	public void OnTriggerEnter2D(Collider2D collision)

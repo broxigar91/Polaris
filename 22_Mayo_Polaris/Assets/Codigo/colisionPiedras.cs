@@ -10,12 +10,8 @@ public class colisionPiedras : MonoBehaviour {
 
 
 	void Update () {
+
 		transform.Translate (new Vector2 (-speed * Time.deltaTime, 0));
-
-
-
-
-
 	}
 
     public void OnTriggerEnter2D(Collider2D collision)

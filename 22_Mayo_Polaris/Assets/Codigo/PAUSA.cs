@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class Pausa : MonoBehaviour {
 
     public static Pausa instance;
 
     private void Start()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -33,9 +32,8 @@ public class Pausa : MonoBehaviour {
     {
         gameObject.SetActive(false);
         Time.timeScale = 1;
+        GameManager.instance.estado = EstadosJuego.MENUPRINCIPAL;
         SceneManager.LoadScene(0);
     }
-
-    
 
 }

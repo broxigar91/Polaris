@@ -17,12 +17,14 @@ public class GameManager : MonoBehaviour {
 
     public EstadosJuego estado;
     public GameObject menuPausa;
+    public GameObject menuDerrota;
+    public GameObject menuVictoria;
+    private bool victoria = false;
 
 
-	// Use this for initialization
-	void Start () {
-		
-        if(instance == null)
+    private void Awake()
+    {
+        if (instance == null)
         {
             instance = this;
         }
@@ -30,8 +32,13 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
 
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Use this for initialization
+    void Start () {
+		        
         estado = EstadosJuego.MENUPRINCIPAL;
 	}
 	
@@ -43,6 +50,16 @@ public class GameManager : MonoBehaviour {
             estado = EstadosJuego.PAUSA;
             menuPausa.SetActive(true);
             Time.timeScale = 0;
+        }
+
+        if(estado == EstadosJuego.DERROTA)
+        {
+            menuDerrota.SetActive(true);
+        }
+
+        if(estado == EstadosJuego.VICTORIA)
+        {
+            menuVictoria.SetActive(true);
         }
 
 	}

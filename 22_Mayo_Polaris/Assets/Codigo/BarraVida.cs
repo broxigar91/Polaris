@@ -89,9 +89,7 @@ public class BarraVida : MonoBehaviour {
 				if (gameObject.name == "5Vidas")
 					gameObject.GetComponent<Renderer>().enabled = false;
 				break;
-
 			}
-
 		}
 	}
 }

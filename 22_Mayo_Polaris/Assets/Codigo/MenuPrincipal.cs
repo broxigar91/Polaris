@@ -6,6 +6,7 @@ public class MenuPrincipal : MonoBehaviour {
 
     public void Jugar()
     {
+        GameManager.instance.estado = EstadosJuego.JUGANDO;
         SceneManager.LoadScene(3);
     }
     
@@ -26,6 +27,7 @@ public class MenuPrincipal : MonoBehaviour {
 
     public void VolverAPrincipal()
     {
+        GameManager.instance.estado = EstadosJuego.MENUPRINCIPAL;
         SceneManager.LoadScene(0);
     }
 }

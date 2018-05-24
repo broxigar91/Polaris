@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		rb2d = GetComponent<Rigidbody2D>();
 	}
-
+    
 
 
 	void Update () {  
@@ -92,15 +92,24 @@ public class Player : MonoBehaviour {
 		delayArma += Time.deltaTime;
 
 
-		// Detectamos el movimiento
-		Movements ();
+        if(GameManager.instance.estado == EstadosJuego.JUGANDO)
+        {
+            // Detectamos el movimiento
+            Movements();
+            // Procesamos las animaciones
+            Animations();
 
-		// Procesamos las animaciones
-		Animations ();
+            // tristeza
+            SlashAttack();
+        }
 
-		// tristeza
-		SlashAttack ();
 
+        if(vida <=0)
+        {
+            GameManager.instance.estado = EstadosJuego.DERROTA;
+            GameManager.instance.menuDerrota.SetActive(true);
+            
+        }
 	}
 		
 	void Movements () {
@@ -122,15 +131,17 @@ public class Player : MonoBehaviour {
 
 
 	void FixedUpdate () {
-		// Nos movemos en el fixed por las físicas
-		rb2d.MovePosition(rb2d.position + mov * speed * Time.deltaTime);
+
+        if (GameManager.instance.estado == EstadosJuego.JUGANDO)
+            // Nos movemos en el fixed por las físicas
+            rb2d.MovePosition(rb2d.position + mov * speed * Time.deltaTime);
 	}
 
 
     void SlashAttack ()
     {
 		// Buscamos el estado actual mirando la información del animador
-		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
+		//AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo (0);
 
 		// Ataque a distancia CAMBIAR DELAYARMA PARA QUE EL PROJECTIL VAYA MAS LENTO/RAPIDO
 		if (Input.GetKeyUp (KeyCode.Space)){
@@ -146,6 +157,12 @@ public class Player : MonoBehaviour {
 			delayArma = 0;
 		}
 	}
+
+    public void ReiniciarVida()
+    {
+        vida = 5;
+    }
+
 }
 
 
