@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     public GameObject menuPausa;
     public GameObject menuDerrota;
     public GameObject menuVictoria;
-    private bool victoria = false;
+    
 
 
     private void Awake()
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -51,16 +52,5 @@ public class GameManager : MonoBehaviour {
             menuPausa.SetActive(true);
             Time.timeScale = 0;
         }
-
-        if(estado == EstadosJuego.DERROTA)
-        {
-            menuDerrota.SetActive(true);
-        }
-
-        if(estado == EstadosJuego.VICTORIA)
-        {
-            menuVictoria.SetActive(true);
-        }
-
 	}
 }

@@ -31,38 +31,7 @@ public class Player : MonoBehaviour {
 		}
 	}
     
-	//COPIAR ESTA PARTE EN EL ARCHIVO DEL OSO
 
-
-//	public float vida = 10033;
-//	public float inmunityTime;
-//	public float tiempo;
-//	public bool inmunity = false;
-//
-	//COPIAR ESTA PARTE EN EL ARCHIVO DEL OSO, CUALQUIER PARTE
-	//
-//	public void OnCollisionEnter2D(Collision2D collision)
-//	{
-//		if (collision.collider.name == "Pedrusco") {
-//			if(!inmunity)
-//				vida--;
-//			inmunity = true;
-//			Debug.Log ("Se han chocado en PLAYER");
-//		}
-//
-//	}
-//
-	//   //COPIAR ESTA PARTE EN VOID UPDATE() DEL OSO
-//	Debug.Log (vida + "tienes");
-//
-//	if (inmunity) {
-//		inmunityTime += Time.deltaTime;
-//		if (inmunityTime >= 1.5) {
-//			inmunity = false;
-//			inmunityTime = 0;
-//		}
-//
-//	}
 
 	void awake () {
 
@@ -77,8 +46,7 @@ public class Player : MonoBehaviour {
 
 
 	void Update () {  
-
-		Debug.Log (vida + "tienes");
+		
 
 		if (inmunity) {
 			inmunityTime += Time.deltaTime;
@@ -104,11 +72,11 @@ public class Player : MonoBehaviour {
         }
 
 
-        if(vida <=0)
+        if(vida == 0)
         {
             GameManager.instance.estado = EstadosJuego.DERROTA;
             GameManager.instance.menuDerrota.SetActive(true);
-            
+            vida = -1;
         }
 	}
 		
@@ -146,14 +114,16 @@ public class Player : MonoBehaviour {
 		// Ataque a distancia CAMBIAR DELAYARMA PARA QUE EL PROJECTIL VAYA MAS LENTO/RAPIDO
 		if (Input.GetKeyUp (KeyCode.Space)){
 		}
-        else if (Input.GetKeyDown (KeyCode.Space) && delayArma >0.3) { 
-				float angle = Mathf.Atan2 ( anim.GetFloat ("movY"), anim.GetFloat ("movX")) * Mathf.Rad2Deg;
+        else if (Input.GetKeyDown (KeyCode.Space) && delayArma >0.3)
+        { 
+			float angle = Mathf.Atan2 ( anim.GetFloat ("movY"), anim.GetFloat ("movX")) * Mathf.Rad2Deg;
 
-				GameObject slashObj = Instantiate (slashPrefab, transform.position,Quaternion.AngleAxis (angle, Vector3.forward));
+			GameObject slashObj = Instantiate (slashPrefab, transform.position,Quaternion.AngleAxis (angle, Vector3.forward));
+            AudioManager.instance.Play("Disparo");
 
-				Slash slash = slashObj.GetComponent<Slash> ();
-				slash.mov.x = anim.GetFloat ("movX");
-				slash.mov.y = anim.GetFloat ("movY");
+			Slash slash = slashObj.GetComponent<Slash> ();
+			slash.mov.x = anim.GetFloat ("movX");
+			slash.mov.y = anim.GetFloat ("movY");
 			delayArma = 0;
 		}
 	}
